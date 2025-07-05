@@ -9,27 +9,33 @@
 #include <vector>
 
 std::string frequencyToString(const Frequency &frequency, const std::string &label) {
-  char ret[16]; // Should be at most 12 chars
+  char ret[128]; // Should be at most 12 chars for frequency and at most 20 for the label (realistically)
+  u_int32_t offset = 0; // Char Buffer Offset
 
   float truncated = std::trunc(frequency * 1000.0) / 1000.0; // Knocks off most decimals
 
+  if (!label.empty()) { // Add label if not empty
+    offset += sprintf(buf + offset, "%s: ", label.c_str());
+  }
+
+
   if(frequency <= 1000) { // Hz
-    sprintf(buf, "%.3f Hz", truncated/1000);
+    sprintf(buf + offset, "%.3f Hz", truncated/1000);
     return std::string(buf);
   }
 
   if(frequency <= 1000000) { // kHz
-    sprintf(buf, "%.3f kHz", truncated/1000000);
+    sprintf(buf + offset, "%.3f kHz", truncated/1000000);
     return std::string(buf);
   }
 
   if(frequency <= 1000000000) { // MHz
-    sprintf(buf, "%.3f MHz", truncated/1000000000);
+    sprintf(buf + offset, "%.3f MHz", truncated/1000000000);
     return std::string(buf);
   }
 
     if(frequency <= 1000000000000) { // GHz
-    sprintf(buf, "%.3f GHz", truncated/1000000000000);
+    sprintf(buf + offset, "%.3f GHz", truncated/1000000000000);
     return std::string(buf);
   }
 
