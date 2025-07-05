@@ -66,7 +66,7 @@ std::string FrequencyRange::toString() const {
 
 Frequency FrequencyRange::center() const { return (start + stop) / 2; }
 
-uint32_t FrequencyRange::step() const { return sampleRate / fft; }
+uint64_t FrequencyRange::step() const { return sampleRate / fft; }
 
 bool FrequencyRange::operator==(const FrequencyRange &rhs) const { return start == rhs.start && stop == rhs.stop && sampleRate == rhs.sampleRate && fft == rhs.fft; }
 
