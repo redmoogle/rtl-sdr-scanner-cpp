@@ -8,26 +8,34 @@
 #include <stdexcept>
 #include <vector>
 
-std::string frequencyToString(const Frequency &frequency, const std::string &label) {
-  char buf[1024];
-  const auto f1 = frequency / 1000000;
-  const auto f2 = (frequency / 1000) % 1000;
-  const auto f3 = frequency % 1000;
+const std::string freqTable = {"Hz", "KHz", "MHz", "GHz"}
 
-  u_int32_t offset = 0;
-  if (!label.empty()) {
-    offset += sprintf(buf + offset, "%s: ", label.c_str());
+std::string frequencyToString(const Frequency &frequency, const std::string &label) {
+  char ret[16]; // Should be at most 12 chars
+
+  float truncated = std::trunc(frequency * 1000.0) / 1000.0; // Knocks off most decimals
+
+  if(frequency <= 1000) { // Hz
+    sprintf(buf, "%.3f" Hz", truncated/1000);
+    return std::string(buf);
   }
-  if (f1 == 0 && f2 == 0) {
-    offset += sprintf(buf + offset, "%03d Hz", f3);
-  } else if (f1 == 0) {
-    offset += sprintf(buf + offset, "%03d.%03d Hz", f2, f3);
-  } else if (f3 == 0) {
-    offset += sprintf(buf + offset, "%03d.%03d kHz", f1, f2);
-  } else {
-    offset += sprintf(buf + offset, "%03d.%03d.%03d Hz", f1, f2, f3);
+
+  if(frequency <= 1000000) { // kHz
+    sprintf(buf, "%.3f kHz", truncated/1000000);
+    return std::string(buf);
   }
-  return std::string(buf);
+
+  if(frequency <= 1000000000) { // MHz
+    sprintf(buf, "%.3f MHz", truncated/1000000000);
+    return std::string(buf);
+  }
+
+    if(frequency <= 1000000000000) { // GHz
+    sprintf(buf, "%.3f GHz", truncated/1000000000000);
+    return std::string(buf);
+  }
+
+  return std::string(frequency);
 }
 
 std::string powerToString(const Power &power) {
