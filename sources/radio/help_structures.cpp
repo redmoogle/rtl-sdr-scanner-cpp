@@ -39,7 +39,7 @@ std::string frequencyToString(const Frequency &frequency, const std::string &lab
     return std::string(buf);
   }
 
-  sprintf(buf + offset, "%f Hz", frequency);
+  sprintf(buf + offset, "%i Hz", frequency);
   return std::string(buf);
 }
 
