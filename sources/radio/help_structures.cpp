@@ -9,7 +9,7 @@
 #include <vector>
 
 std::string frequencyToString(const Frequency &frequency, const std::string &label) {
-  char ret[128]; // Should be at most 12 chars for frequency and at most 20 for the label (realistically)
+  char buf[128]; // Should be at most 12 chars for frequency and at most 20 for the label (realistically)
   u_int32_t offset = 0; // Char Buffer Offset
 
   float truncated = std::trunc(frequency * 1000.0) / 1000.0; // Knocks off most decimals
