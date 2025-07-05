@@ -20,22 +20,22 @@ std::string frequencyToString(const Frequency &frequency, const std::string &lab
 
 
   if(frequency <= 1000) { // Hz
-    sprintf(buf + offset, "%.3f Hz", truncated/1000);
+    sprintf(buf + offset, "%.3f Hz", truncated);
     return std::string(buf);
   }
 
   if(frequency <= 1000000) { // kHz
-    sprintf(buf + offset, "%.3f kHz", truncated/1000000);
+    sprintf(buf + offset, "%.3f kHz", truncated/1000);
     return std::string(buf);
   }
 
   if(frequency <= 1000000000) { // MHz
-    sprintf(buf + offset, "%.3f MHz", truncated/1000000000);
+    sprintf(buf + offset, "%.3f MHz", truncated/1000000);
     return std::string(buf);
   }
 
-    if(frequency <= 1000000000000) { // GHz
-    sprintf(buf + offset, "%.3f GHz", truncated/1000000000000);
+    if(frequency > 1000000000) { // GHz
+    sprintf(buf + offset, "%.3f GHz", truncated/1000000000);
     return std::string(buf);
   }
 
@@ -66,7 +66,7 @@ std::string FrequencyRange::toString() const {
 
 Frequency FrequencyRange::center() const { return (start + stop) / 2; }
 
-uint64_t FrequencyRange::step() const { return sampleRate / fft; }
+uint32_t FrequencyRange::step() const { return sampleRate / fft; }
 
 bool FrequencyRange::operator==(const FrequencyRange &rhs) const { return start == rhs.start && stop == rhs.stop && sampleRate == rhs.sampleRate && fft == rhs.fft; }
 
