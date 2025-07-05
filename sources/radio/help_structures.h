@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <string>
 
-using Frequency = uint32_t;
+using Frequency = uint64_t;
 using Power = float;
 
 std::string frequencyToString(const Frequency& frequency, const std::string& label = "frequency");
