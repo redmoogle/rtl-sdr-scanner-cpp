@@ -16,7 +16,7 @@ std::string frequencyToString(const Frequency &frequency, const std::string &lab
   float truncated = std::trunc(frequency * 1000.0) / 1000.0; // Knocks off most decimals
 
   if(frequency <= 1000) { // Hz
-    sprintf(buf, "%.3f" Hz", truncated/1000);
+    sprintf(buf, "%.3f Hz", truncated/1000);
     return std::string(buf);
   }
 
