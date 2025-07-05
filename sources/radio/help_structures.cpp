@@ -39,7 +39,8 @@ std::string frequencyToString(const Frequency &frequency, const std::string &lab
     return std::string(buf);
   }
 
-  return std::string(frequency);
+  sprintf(buf + offset, "%f Hz", frequency);
+  return std::string(buf);
 }
 
 std::string powerToString(const Power &power) {
