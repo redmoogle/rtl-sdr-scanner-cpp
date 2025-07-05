@@ -8,8 +8,6 @@
 #include <stdexcept>
 #include <vector>
 
-const std::string freqTable = {"Hz", "KHz", "MHz", "GHz"}
-
 std::string frequencyToString(const Frequency &frequency, const std::string &label) {
   char ret[16]; // Should be at most 12 chars
 
